@@ -69,7 +69,7 @@ public class VisitListActivity extends Activity {
 		
 		lbl_nombres = (TextView) findViewById(R.id.lbl_nombres);
 		
-		url = mPreferences.getString(PreferencesActivity.KEY_SERVER_URL, "http://demo.sociosensalud.org.pe");
+		url = mPreferences.getString(PreferencesActivity.KEY_SERVER_URL, "http://70.38.64.52");
     	codigopaciente = mPreferences.getString("CodigoPaciente", "");
     	patientname = mPreferences.getString("patient_name", "");
     	lbl_nombres.setText(patientname);
