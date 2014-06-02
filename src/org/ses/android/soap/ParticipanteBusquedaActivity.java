@@ -67,7 +67,7 @@ public class ParticipanteBusquedaActivity extends Activity {
 			{
 				mPreferences = getSharedPreferences(
 				           AdminPreferencesActivity.ADMIN_PREFERENCES, 0);	
-		        String url = mPreferences.getString(PreferencesActivity.KEY_SERVER_URL, "http://demo.sociosensalud.org.pe");
+		        String url = mPreferences.getString(PreferencesActivity.KEY_SERVER_URL, "http://70.38.64.52");
 
 	        	asyncTask=tarea.execute(doc_identidad,url);
 		        Participant objParticipante;

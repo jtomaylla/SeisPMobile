@@ -87,7 +87,7 @@ public class ParticipanteDNIActivity extends Activity {
     			        else
     					{
 
-    				        String url = mPreferences.getString(PreferencesActivity.KEY_SERVER_URL, "http://demo.sociosensalud.org.pe");
+    				        String url = mPreferences.getString(PreferencesActivity.KEY_SERVER_URL, "http://70.38.64.52");
 
     			        	asyncTask=tarea.execute(doc_identidad,url);
     				        String existe = asyncTask.get();

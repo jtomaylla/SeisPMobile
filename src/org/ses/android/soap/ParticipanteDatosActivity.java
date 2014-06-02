@@ -104,7 +104,7 @@ public class ParticipanteDatosActivity extends Activity {
 					mPreferences = getSharedPreferences(
 					           AdminPreferencesActivity.ADMIN_PREFERENCES, Context.MODE_PRIVATE);	 
 					
-			        url = mPreferences.getString(PreferencesActivity.KEY_SERVER_URL, "http://demo.sociosensalud.org.pe");
+			        url = mPreferences.getString(PreferencesActivity.KEY_SERVER_URL, "http://70.38.64.52");
 			        Log.i("URL",url);
 		        	dni = mPreferences.getString("doc_identidad", "");
 		        	

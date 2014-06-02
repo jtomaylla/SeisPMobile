@@ -120,7 +120,8 @@ public class MainActivity extends Activity {
 				mPreferences = getSharedPreferences(
 				           AdminPreferencesActivity.ADMIN_PREFERENCES, Context.MODE_PRIVATE);	 
 				
-		        String url = mPreferences.getString(PreferencesActivity.KEY_SERVER_URL, "http://demo.sociosensalud.org.pe");
+//		        String url = mPreferences.getString(PreferencesActivity.KEY_SERVER_URL, "http://demo.sociosensalud.org.pe");
+		        String url = mPreferences.getString(PreferencesActivity.KEY_SERVER_URL, "http://70.38.64.52");
 			    Editor editor = mPreferences.edit();
 				Log.i("login", "OnClick_url:" + url);
 				showDialog(PROGRESS_DIALOG);
