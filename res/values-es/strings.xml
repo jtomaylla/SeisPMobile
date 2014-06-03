@@ -68,7 +68,7 @@
 	<string name="data_saved_ok">Formulario guardado correctamente</string>
 	<string name="default_completed">Considerar finalizado por defecto</string>
 	<string name="default_completed_summary">Marcar el formulario como terminado por defecto</string>
-	<string name="default_server_url">http://demo.sociosensalud.org.pe</string>
+	<string name="default_server_url">http://70.38.64.52</string>
 	<string name="delete_confirm">Borrar %s formulario(s)?</string>
 	<string name="delete_file">Borrar los Seleccionados</string>
 	<string name="delete_no">No Borrar</string>
