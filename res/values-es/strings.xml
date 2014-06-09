@@ -281,5 +281,6 @@
 	<string name="txtvisit">Visita:</string>
 	<string name="menu_visitlist">Mostrar Visitas</string>
 	<string name="no_visits">No hay Visitas</string>
-	<string name="online">Hay conexión a internet</string>		
+	<string name="online">Hay conexión a internet</string>
+	<string name="opc_run_odk">Llamar ODK</string>			
 </resources>

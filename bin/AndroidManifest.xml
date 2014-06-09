@@ -79,7 +79,12 @@
         <activity
             android:name="org.ses.android.soap.VisitListActivity"
             android:label="@string/app_name" />   
-               
+        <service android:name="org.ses.android.aidlserver.ArithmeticService"
+                     android:process=":remote">
+                <intent-filter >
+                    <action android:name="com.remote.service.CALCULATOR"/>
+                </intent-filter>
+        </service>               
     </application>
 
 </manifest>

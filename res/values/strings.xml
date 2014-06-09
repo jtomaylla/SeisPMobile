@@ -281,5 +281,6 @@
 	<string name="txtvisit">Visit:</string>	
 	<string name="menu_visitlist">Visit List</string>
 	<string name="no_visits">No Visits</string>
-	<string name="online">Network connection available</string>	
+	<string name="online">Network connection available</string>
+	<string name="opc_run_odk">Call ODK</string>	
 </resources>

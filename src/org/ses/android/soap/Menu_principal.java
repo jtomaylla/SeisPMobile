@@ -13,8 +13,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,6 +26,7 @@ public class Menu_principal extends Activity {
 	private Button btnRegistrarParticipante;
 	private Button btnGenerarVisita;
 	private Button btnCerrarSesion;
+	private Button btnRunODK;
 //	private static final int PASSWORD_DIALOG = 1;
     // menu options
     private static final int MENU_PREFERENCES = Menu.FIRST;
@@ -46,6 +47,7 @@ public class Menu_principal extends Activity {
 		btnRegistrarParticipante = (Button)findViewById(R.id.btnRegistrarParticipante);
 		btnGenerarVisita = (Button)findViewById(R.id.btnGenerarVisita);
 		btnCerrarSesion = (Button)findViewById(R.id.btnCerrarSesion);
+		btnRunODK = (Button)findViewById(R.id.btnRunODK);
         mAdminPreferences = this.getSharedPreferences(AdminPreferencesActivity.ADMIN_PREFERENCES, 0);
         
         btnRegistrarParticipante.setOnClickListener(new OnClickListener() {
@@ -66,7 +68,24 @@ public class Menu_principal extends Activity {
                 startActivity(intent);
 			}
 		});
-        
+        btnRunODK.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {		
+//				Toast.makeText(getBaseContext(), "Opcion deshabilitada!!",Toast.LENGTH_SHORT).show();
+				Intent i;
+				PackageManager manager = getPackageManager();
+				try {
+				    i = manager.getLaunchIntentForPackage("org.odk.collect.android");
+				    if (i == null)
+				        throw new PackageManager.NameNotFoundException();
+				    i.addCategory(Intent.CATEGORY_LAUNCHER);
+				    startActivity(i);
+				} catch (PackageManager.NameNotFoundException e) {
+
+				}
+			}
+		});        
         btnCerrarSesion.setOnClickListener(new OnClickListener() {
 			
 			@Override
