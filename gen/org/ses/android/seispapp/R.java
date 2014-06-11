@@ -12,10 +12,12 @@ public final class R {
         public static final int ArrayOfLocal=0x7f050004;
         public static final int font_size_entries=0x7f050003;
         /**  DO NOT alter font_size_entry_values - used internally in preferences activity 
+ DO NOT alter font_size_entry_values - used internally in preferences activity 
          */
         public static final int font_size_entry_values=0x7f050002;
         public static final int protocol_entries=0x7f050001;
         /**  DO NOT translate protocol_entry_values - only used internally 
+ DO NOT translate protocol_entry_values - only used internally 
          */
         public static final int protocol_entry_values=0x7f050000;
     }

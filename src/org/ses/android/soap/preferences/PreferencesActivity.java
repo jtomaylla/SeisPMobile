@@ -58,7 +58,8 @@ public class PreferencesActivity extends PreferenceActivity implements
     public static final String KEY_USERNAME = "username";
     public static final String KEY_PASSWORD = "password";
     public static final String KEY_USERID = "userid";
-
+    public static final String KEY_FILTERFORMS = "filter_forms";
+    
     public static final String KEY_PROTOCOL = "protocol";
 
     public static final String PROTOCOL_ODK_DEFAULT = "odk_default";

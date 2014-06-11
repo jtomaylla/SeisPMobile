@@ -88,8 +88,9 @@ public class ParticipanteVisitaActivity extends Activity {
 		setContentView(R.layout.participante_visita_layout);
 		mPreferences = getSharedPreferences(
 		           AdminPreferencesActivity.ADMIN_PREFERENCES, 0);		
-		
-        url = mPreferences.getString(PreferencesActivity.KEY_SERVER_URL, "http://70.38.64.52");
+        url = mPreferences.getString(PreferencesActivity.KEY_SERVER_URL, "http://demo.sociosensalud.org.pe");
+
+//        url = mPreferences.getString(PreferencesActivity.KEY_SERVER_URL, "http://70.38.64.52");
         String nombres = mPreferences.getString("patient_name", "");
         Log.i("URL",url);
 		edt_nombres = (EditText)findViewById(R.id.edt_nombres);

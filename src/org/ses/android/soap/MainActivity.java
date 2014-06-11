@@ -7,6 +7,7 @@ import org.ses.android.soap.database.Login;
 import org.ses.android.soap.preferences.AdminPreferencesActivity;
 import org.ses.android.soap.preferences.PreferencesActivity;
 import org.ses.android.soap.tasks.AsyncTaskRunner;
+import org.ses.android.soap.tasks.FormListTask;
 import org.ses.android.soap.tasks.LocalLoadTask;
 import org.ses.android.soap.utilities.AppStatus;
 
@@ -40,6 +41,8 @@ public class MainActivity extends Activity {
 
 	private AsyncTask<String, String, Login> asyncTask;
 	private AsyncTask<String, String, Local[]> loadLocal;
+	private AsyncTask<String, String, String> formListTask;
+	
 	private String response;
 	private static Context context;
 	private String selLocal,mAlertMsg;
@@ -120,8 +123,8 @@ public class MainActivity extends Activity {
 				mPreferences = getSharedPreferences(
 				           AdminPreferencesActivity.ADMIN_PREFERENCES, Context.MODE_PRIVATE);	 
 				
-//		        String url = mPreferences.getString(PreferencesActivity.KEY_SERVER_URL, "http://demo.sociosensalud.org.pe");
-		        String url = mPreferences.getString(PreferencesActivity.KEY_SERVER_URL, "http://70.38.64.52");
+		        String url = mPreferences.getString(PreferencesActivity.KEY_SERVER_URL, "http://demo.sociosensalud.org.pe");
+//		        String url = mPreferences.getString(PreferencesActivity.KEY_SERVER_URL, "http://70.38.64.52");
 			    Editor editor = mPreferences.edit();
 				Log.i("login", "OnClick_url:" + url);
 				showDialog(PROGRESS_DIALOG);
@@ -131,7 +134,7 @@ public class MainActivity extends Activity {
 				    editor.putString(PreferencesActivity.KEY_USERNAME, userName);
 				    editor.putString(PreferencesActivity.KEY_PASSWORD, password);
 				    editor.putString(PreferencesActivity.KEY_USERID, String.valueOf(login.CodigoUsuario));
-				    editor.commit();
+//				    editor.commit();
 
 					response = login.Mensaje;
 					Log.i("login", "OnClick_response:" + response);
@@ -142,7 +145,14 @@ public class MainActivity extends Activity {
 				 	if(response.equals("Gracias por Iniciar Sesion") || response.equals("Contraseña caducada")){    
 						Intent intent=new Intent(MainActivity.this,Menu_principal.class); 
 						startActivity(intent); 
-
+						// Remote Server
+						FormListTask formList=new FormListTask();
+						formListTask=formList.execute(String.valueOf(login.CodigoUsuario),url);
+						String filterForms = formList.get();
+						Log.i("login", ".filterForms:"+filterForms );
+						editor.putString(PreferencesActivity.KEY_FILTERFORMS, filterForms);
+						editor.commit();
+						// Remote Server						
 						finish();
 
 				 	}else{
