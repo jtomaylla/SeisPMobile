@@ -34,8 +34,8 @@ public class ArithmeticService extends Service {
 			           AdminPreferencesActivity.ADMIN_PREFERENCES, Context.MODE_PRIVATE);	
 			String filterForms = mPreferences.getString(PreferencesActivity.KEY_FILTERFORMS, "");
 			Log.i("filterForms:",filterForms);
-            return ("DOTS_A1_V1/DOTS_B1_V1");
-//            return filterForms;
+//            return ("DOTS_A1_V1/DOTS_B1_V1");
+            return filterForms;
         }
     };
 }

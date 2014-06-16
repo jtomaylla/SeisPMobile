@@ -7,7 +7,6 @@ import org.ses.android.soap.database.Login;
 import org.ses.android.soap.preferences.AdminPreferencesActivity;
 import org.ses.android.soap.preferences.PreferencesActivity;
 import org.ses.android.soap.tasks.AsyncTaskRunner;
-import org.ses.android.soap.tasks.FormListTask;
 import org.ses.android.soap.tasks.LocalLoadTask;
 import org.ses.android.soap.utilities.AppStatus;
 
@@ -41,7 +40,7 @@ public class MainActivity extends Activity {
 
 	private AsyncTask<String, String, Login> asyncTask;
 	private AsyncTask<String, String, Local[]> loadLocal;
-	private AsyncTask<String, String, String> formListTask;
+//	private AsyncTask<String, String, String> formListTask;
 	
 	private String response;
 	private static Context context;
@@ -143,16 +142,17 @@ public class MainActivity extends Activity {
 		//					startActivity(i); 
 		//				 //
 				 	if(response.equals("Gracias por Iniciar Sesion") || response.equals("Contraseña caducada")){    
-						Intent intent=new Intent(MainActivity.this,Menu_principal.class); 
-						startActivity(intent); 
 						// Remote Server
-						FormListTask formList=new FormListTask();
-						formListTask=formList.execute(String.valueOf(login.CodigoUsuario),url);
-						String filterForms = formList.get();
-						Log.i("login", ".filterForms:"+filterForms );
-						editor.putString(PreferencesActivity.KEY_FILTERFORMS, filterForms);
-						editor.commit();
-						// Remote Server						
+//						FormListTask formList=new FormListTask();
+//						formListTask=formList.execute(String.valueOf(login.CodigoUsuario),url);
+//						String filterForms = formList.get();
+//						Log.i("login", ".filterForms:"+filterForms );
+//						editor.putString(PreferencesActivity.KEY_FILTERFORMS, filterForms);
+//						editor.commit();
+						// Remote Server	
+				 		Intent intent=new Intent(MainActivity.this,Menu_principal.class); 
+						startActivity(intent); 
+					
 						finish();
 
 				 	}else{

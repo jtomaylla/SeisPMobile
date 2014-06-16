@@ -1,9 +1,12 @@
 package org.ses.android.soap;
 
 
+import java.util.concurrent.ExecutionException;
+
 import org.ses.android.seispapp.R;
 import org.ses.android.soap.preferences.AdminPreferencesActivity;
 import org.ses.android.soap.preferences.PreferencesActivity;
+import org.ses.android.soap.tasks.FormListTask;
 import org.ses.android.soap.utilities.AppStatus;
 
 import android.app.Activity;
@@ -14,7 +17,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.content.pm.PackageManager;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -27,6 +32,8 @@ public class Menu_principal extends Activity {
 	private Button btnGenerarVisita;
 	private Button btnCerrarSesion;
 	private Button btnRunODK;
+	private AsyncTask<String, String, String> formListTask;
+	SharedPreferences mPreferences;
 //	private static final int PASSWORD_DIALOG = 1;
     // menu options
     private static final int MENU_PREFERENCES = Menu.FIRST;
@@ -73,6 +80,30 @@ public class Menu_principal extends Activity {
 			@Override
 			public void onClick(View v) {		
 //				Toast.makeText(getBaseContext(), "Opcion deshabilitada!!",Toast.LENGTH_SHORT).show();
+				// Remote Server
+				mPreferences = getSharedPreferences(
+				           AdminPreferencesActivity.ADMIN_PREFERENCES, Context.MODE_PRIVATE);
+		        String url = mPreferences.getString(PreferencesActivity.KEY_SERVER_URL, "http://demo.sociosensalud.org.pe");
+		        String codigo = mPreferences.getString(PreferencesActivity.KEY_USERID, "");
+		        Editor editor = mPreferences.edit();
+		        
+				FormListTask formList=new FormListTask();
+				formListTask=formList.execute(codigo,url);
+//				String filterForms;
+				try {
+					String filterForms = formList.get();
+					Log.i("menu", ".filterForms:"+filterForms );
+					editor.putString(PreferencesActivity.KEY_FILTERFORMS, filterForms);
+					editor.commit();				
+				} catch (InterruptedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (ExecutionException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+
+				// Remote Server	
 				Intent i;
 				PackageManager manager = getPackageManager();
 				try {
