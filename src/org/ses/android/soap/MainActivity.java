@@ -20,6 +20,7 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -30,7 +31,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-@SuppressLint("NewApi")
+
 public class MainActivity extends Activity {
 	private Button btnIngresar;
 	private EditText txtUsuario;
@@ -52,7 +53,7 @@ public class MainActivity extends Activity {
    public static final String pass = "passKey";
    public static final String url = "urlKey";
    private static final int PROGRESS_DIALOG = 1;
-   SharedPreferences mPreferences ;
+   SharedPreferences mPreferences;
    public ProgressDialog mProgressDialog;
    private AsyncTaskRunner mAsyncTaskRunner;
   /** Called when the activity is first created. */
@@ -119,10 +120,16 @@ public class MainActivity extends Activity {
 				AsyncTaskRunner runner=new AsyncTaskRunner();
 				String userName=txtUsuario.getText().toString();
 				String password=txtPassword.getText().toString();
-				mPreferences = getSharedPreferences(
-				           AdminPreferencesActivity.ADMIN_PREFERENCES, Context.MODE_PRIVATE);	 
+				//test
+                // Get the server from the settings
+                mPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+                String url = mPreferences.getString(PreferencesActivity.KEY_SERVER_URL,
+                        getString(R.string.default_server_url));
+                //test
+//				mPreferences = getSharedPreferences(
+//				           AdminPreferencesActivity.ADMIN_PREFERENCES, Context.MODE_PRIVATE);	 
 				
-		        String url = mPreferences.getString(PreferencesActivity.KEY_SERVER_URL, "http://demo.sociosensalud.org.pe");
+//		        String url = mPreferences.getString(PreferencesActivity.KEY_SERVER_URL, "http://demo.sociosensalud.org.pe");
 //		        String url = mPreferences.getString(PreferencesActivity.KEY_SERVER_URL, "http://70.38.64.52");
 			    Editor editor = mPreferences.edit();
 				Log.i("login", "OnClick_url:" + url);
@@ -148,7 +155,7 @@ public class MainActivity extends Activity {
 //						String filterForms = formList.get();
 //						Log.i("login", ".filterForms:"+filterForms );
 //						editor.putString(PreferencesActivity.KEY_FILTERFORMS, filterForms);
-//						editor.commit();
+						editor.commit();
 						// Remote Server	
 				 		Intent intent=new Intent(MainActivity.this,Menu_principal.class); 
 						startActivity(intent); 
@@ -195,7 +202,10 @@ public class MainActivity extends Activity {
 			mPreferences = getSharedPreferences(
 			           AdminPreferencesActivity.ADMIN_PREFERENCES, Context.MODE_PRIVATE);	 
 			LocalLoadTask tareaLocal = new LocalLoadTask();
-			String url = mPreferences.getString(PreferencesActivity.KEY_SERVER_URL, "http://demo.sociosensalud.org.pe");
+//			String url = mPreferences.getString(PreferencesActivity.KEY_SERVER_URL, "http://demo.sociosensalud.org.pe");
+            mPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+            String url = mPreferences.getString(PreferencesActivity.KEY_SERVER_URL,
+                    getString(R.string.default_server_url));
 			loadLocal = tareaLocal.execute(url);
 			Local[] objLocal;
 			String[] wee;

@@ -16,6 +16,7 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -65,11 +66,13 @@ public class ParticipanteBusquedaActivity extends Activity {
 			}
 	        else
 			{
-				mPreferences = getSharedPreferences(
-				           AdminPreferencesActivity.ADMIN_PREFERENCES, 0);	
-		        String url = mPreferences.getString(PreferencesActivity.KEY_SERVER_URL, "http://demo.sociosensalud.org.pe");
+//				mPreferences = getSharedPreferences(
+//				           AdminPreferencesActivity.ADMIN_PREFERENCES, 0);	
+//		        String url = mPreferences.getString(PreferencesActivity.KEY_SERVER_URL, "http://demo.sociosensalud.org.pe");
 //		        String url = mPreferences.getString(PreferencesActivity.KEY_SERVER_URL, "http://70.38.64.52");
-
+                mPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+                String url = mPreferences.getString(PreferencesActivity.KEY_SERVER_URL,
+                        getString(R.string.default_server_url));
 	        	asyncTask=tarea.execute(doc_identidad,url);
 		        Participant objParticipante;
 				try {

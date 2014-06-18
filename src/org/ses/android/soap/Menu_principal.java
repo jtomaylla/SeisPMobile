@@ -19,6 +19,7 @@ import android.content.SharedPreferences.Editor;
 import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -81,10 +82,12 @@ public class Menu_principal extends Activity {
 			public void onClick(View v) {		
 //				Toast.makeText(getBaseContext(), "Opcion deshabilitada!!",Toast.LENGTH_SHORT).show();
 				// Remote Server
-				mPreferences = getSharedPreferences(
-				           AdminPreferencesActivity.ADMIN_PREFERENCES, Context.MODE_PRIVATE);
-		        String url = mPreferences.getString(PreferencesActivity.KEY_SERVER_URL, "http://demo.sociosensalud.org.pe");
-		        String codigo = mPreferences.getString(PreferencesActivity.KEY_USERID, "");
+//				mPreferences = getSharedPreferences(
+//				           AdminPreferencesActivity.ADMIN_PREFERENCES, Context.MODE_PRIVATE);
+//		        String url = mPreferences.getString(PreferencesActivity.KEY_SERVER_URL, "http://demo.sociosensalud.org.pe");
+                mPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+                String url = mPreferences.getString(PreferencesActivity.KEY_SERVER_URL,
+                        getString(R.string.default_server_url));		        String codigo = mPreferences.getString(PreferencesActivity.KEY_USERID, "");
 		        Editor editor = mPreferences.edit();
 		        
 				FormListTask formList=new FormListTask();

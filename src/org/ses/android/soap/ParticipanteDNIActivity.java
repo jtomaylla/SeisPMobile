@@ -8,11 +8,9 @@ import org.ksoap2.serialization.SoapPrimitive;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 import org.ses.android.seispapp.R;
-import org.ses.android.soap.preferences.AdminPreferencesActivity;
 import org.ses.android.soap.preferences.PreferencesActivity;
 import org.ses.android.soap.utilities.UrlUtils;
 import org.ses.android.soap.widgets.GrupoBotones;
-
 
 import android.app.Activity;
 import android.content.Intent;
@@ -20,6 +18,7 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Menu;
 import android.widget.EditText;
@@ -75,20 +74,24 @@ public class ParticipanteDNIActivity extends Activity {
 
 		        try {
 //		        	String tipodoc ="";
-					mPreferences = getSharedPreferences(
-					           AdminPreferencesActivity.ADMIN_PREFERENCES, 0);	 
+//					mPreferences = getSharedPreferences(
+//					           AdminPreferencesActivity.ADMIN_PREFERENCES, 0);	 
+	                mPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 			        int tipdocSeleccionado = rbgTipoDoc.getCheckedRadioButtonId();			        
         			Log.i("dni","OnSiguiente_ID Tipo Doc. opcion seleccionada: " + Integer.toString(tipdocSeleccionado));
 			        String doc_identidad = edt_doc_identidad.getText().toString();
-        			if (tipdocSeleccionado==2131427367){
+        			if (tipdocSeleccionado==2131427368){
     			        if (!UrlUtils.validData(doc_identidad, "[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]")){
     						Toast.makeText(getBaseContext(), "Nro. de DNI invalido!!",Toast.LENGTH_SHORT).show();
     					}
     			        else
     					{
 
-    				        String url = mPreferences.getString(PreferencesActivity.KEY_SERVER_URL, "http://70.38.64.52");
+//    				        String url = mPreferences.getString(PreferencesActivity.KEY_SERVER_URL, "http://demo.sociosensalud.org.pe");
+//    				        String url = mPreferences.getString(PreferencesActivity.KEY_SERVER_URL, "http://70.38.64.52");
 
+    		                String url = mPreferences.getString(PreferencesActivity.KEY_SERVER_URL,
+    		                        getString(R.string.default_server_url));
     			        	asyncTask=tarea.execute(doc_identidad,url);
     				        String existe = asyncTask.get();
     						Log.i("doc_identidad",doc_identidad );

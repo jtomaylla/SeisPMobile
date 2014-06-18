@@ -30,6 +30,7 @@ import android.app.ProgressDialog;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -64,11 +65,13 @@ public class VisitListActivity extends Activity {
         super.onCreate(savedInstanceState);
 //    	requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS); 
         setContentView(R.layout.visits_list);
-		mPreferences = getSharedPreferences(
-		           AdminPreferencesActivity.ADMIN_PREFERENCES, 0);	
-		
+//		mPreferences = getSharedPreferences(
+//		           AdminPreferencesActivity.ADMIN_PREFERENCES, 0);	
+        mPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        String url = mPreferences.getString(PreferencesActivity.KEY_SERVER_URL,
+                getString(R.string.default_server_url));		
 		lbl_nombres = (TextView) findViewById(R.id.lbl_nombres);
-        url = mPreferences.getString(PreferencesActivity.KEY_SERVER_URL, "http://demo.sociosensalud.org.pe");
+//        url = mPreferences.getString(PreferencesActivity.KEY_SERVER_URL, "http://demo.sociosensalud.org.pe");
 		
 //		url = mPreferences.getString(PreferencesActivity.KEY_SERVER_URL, "http://70.38.64.52");
     	codigopaciente = mPreferences.getString("CodigoPaciente", "");
