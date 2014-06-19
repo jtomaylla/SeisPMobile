@@ -66,10 +66,6 @@ public class ParticipanteBusquedaActivity extends Activity {
 			}
 	        else
 			{
-//				mPreferences = getSharedPreferences(
-//				           AdminPreferencesActivity.ADMIN_PREFERENCES, 0);	
-//		        String url = mPreferences.getString(PreferencesActivity.KEY_SERVER_URL, "http://demo.sociosensalud.org.pe");
-//		        String url = mPreferences.getString(PreferencesActivity.KEY_SERVER_URL, "http://70.38.64.52");
                 mPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
                 String url = mPreferences.getString(PreferencesActivity.KEY_SERVER_URL,
                         getString(R.string.default_server_url));

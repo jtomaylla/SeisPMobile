@@ -60,20 +60,16 @@ public class VisitListActivity extends Activity {
 
     public ProgressDialog mProgressDialog;
 	private VisitaListTask mVisitaListTask;
-    @Override
+    @SuppressWarnings("deprecation")
+	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 //    	requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS); 
         setContentView(R.layout.visits_list);
-//		mPreferences = getSharedPreferences(
-//		           AdminPreferencesActivity.ADMIN_PREFERENCES, 0);	
         mPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-        String url = mPreferences.getString(PreferencesActivity.KEY_SERVER_URL,
+        url = mPreferences.getString(PreferencesActivity.KEY_SERVER_URL,
                 getString(R.string.default_server_url));		
 		lbl_nombres = (TextView) findViewById(R.id.lbl_nombres);
-//        url = mPreferences.getString(PreferencesActivity.KEY_SERVER_URL, "http://demo.sociosensalud.org.pe");
-		
-//		url = mPreferences.getString(PreferencesActivity.KEY_SERVER_URL, "http://70.38.64.52");
     	codigopaciente = mPreferences.getString("CodigoPaciente", "");
     	patientname = mPreferences.getString("patient_name", "");
     	lbl_nombres.setText(patientname);

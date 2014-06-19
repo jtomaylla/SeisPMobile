@@ -102,14 +102,10 @@ public class ParticipanteDatosActivity extends Activity {
 			public void OnSiguiente() {
 
 
-//					mPreferences = getSharedPreferences(
-//					           AdminPreferencesActivity.ADMIN_PREFERENCES, Context.MODE_PRIVATE);	 
-//			        url = mPreferences.getString(PreferencesActivity.KEY_SERVER_URL, "http://demo.sociosensalud.org.pe");
-					
-//			        url = mPreferences.getString(PreferencesActivity.KEY_SERVER_URL, "http://70.38.64.52");
                 	mPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
                 	url = mPreferences.getString(PreferencesActivity.KEY_SERVER_URL,
-                        getString(R.string.default_server_url));				Log.i("URL",url);
+                        getString(R.string.default_server_url));				
+                	Log.i("URL",url);
 		        	dni = mPreferences.getString("doc_identidad", "");
 		        	
 		        	if (dni.equals("")) tip_doc = "1";

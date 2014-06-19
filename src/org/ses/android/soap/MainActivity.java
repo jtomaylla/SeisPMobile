@@ -120,17 +120,10 @@ public class MainActivity extends Activity {
 				AsyncTaskRunner runner=new AsyncTaskRunner();
 				String userName=txtUsuario.getText().toString();
 				String password=txtPassword.getText().toString();
-				//test
                 // Get the server from the settings
                 mPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
                 String url = mPreferences.getString(PreferencesActivity.KEY_SERVER_URL,
                         getString(R.string.default_server_url));
-                //test
-//				mPreferences = getSharedPreferences(
-//				           AdminPreferencesActivity.ADMIN_PREFERENCES, Context.MODE_PRIVATE);	 
-				
-//		        String url = mPreferences.getString(PreferencesActivity.KEY_SERVER_URL, "http://demo.sociosensalud.org.pe");
-//		        String url = mPreferences.getString(PreferencesActivity.KEY_SERVER_URL, "http://70.38.64.52");
 			    Editor editor = mPreferences.edit();
 				Log.i("login", "OnClick_url:" + url);
 				showDialog(PROGRESS_DIALOG);
@@ -202,7 +195,6 @@ public class MainActivity extends Activity {
 			mPreferences = getSharedPreferences(
 			           AdminPreferencesActivity.ADMIN_PREFERENCES, Context.MODE_PRIVATE);	 
 			LocalLoadTask tareaLocal = new LocalLoadTask();
-//			String url = mPreferences.getString(PreferencesActivity.KEY_SERVER_URL, "http://demo.sociosensalud.org.pe");
             mPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
             String url = mPreferences.getString(PreferencesActivity.KEY_SERVER_URL,
                     getString(R.string.default_server_url));

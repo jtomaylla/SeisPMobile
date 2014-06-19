@@ -73,9 +73,6 @@ public class ParticipanteDNIActivity extends Activity {
 				ExisteParticipante tarea = new ExisteParticipante();
 
 		        try {
-//		        	String tipodoc ="";
-//					mPreferences = getSharedPreferences(
-//					           AdminPreferencesActivity.ADMIN_PREFERENCES, 0);	 
 	                mPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 			        int tipdocSeleccionado = rbgTipoDoc.getCheckedRadioButtonId();			        
         			Log.i("dni","OnSiguiente_ID Tipo Doc. opcion seleccionada: " + Integer.toString(tipdocSeleccionado));
@@ -86,9 +83,6 @@ public class ParticipanteDNIActivity extends Activity {
     					}
     			        else
     					{
-
-//    				        String url = mPreferences.getString(PreferencesActivity.KEY_SERVER_URL, "http://demo.sociosensalud.org.pe");
-//    				        String url = mPreferences.getString(PreferencesActivity.KEY_SERVER_URL, "http://70.38.64.52");
 
     		                String url = mPreferences.getString(PreferencesActivity.KEY_SERVER_URL,
     		                        getString(R.string.default_server_url));
