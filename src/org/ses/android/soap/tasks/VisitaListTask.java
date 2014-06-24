@@ -20,7 +20,8 @@ public class VisitaListTask extends AsyncTask<String,String,Visitas[]> {
 		String urlserver = params[1];
     	final String NAMESPACE = urlserver+"/";
 		final String URL=NAMESPACE+"WSSEIS/WSParticipante.asmx";
-		final String METHOD_NAME = "ListadoVisitas";
+//		final String METHOD_NAME = "ListadoVisitas";
+		final String METHOD_NAME = "ListadoVisitas1";
 		final String SOAP_ACTION = NAMESPACE+METHOD_NAME;
 		SoapObject request = new SoapObject(NAMESPACE, METHOD_NAME);
 //		SoapObject request = new SoapObject(NAMESPACE, METHOD_NAME);
@@ -50,6 +51,10 @@ public class VisitaListTask extends AsyncTask<String,String,Visitas[]> {
 		           vis.FechaVisita= ic.getProperty(2).toString(); 
 		           vis.HoraCita = ic.getProperty(3).toString();
 		           vis.EstadoVisita= ic.getProperty(4).toString();
+		           
+		           vis.CodigoProyecto= ic.getProperty(5).toString();
+		           vis.CodigoGrupoVisita= ic.getProperty(6).toString();
+		           vis.CodigoVisita= ic.getProperty(7).toString();
 		           
 		           lstVisitas[i] = vis;
 

@@ -76,34 +76,37 @@ public class Menu_principal extends Activity {
                 startActivity(intent);
 			}
 		});
+        
         btnRunODK.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {		
 //				Toast.makeText(getBaseContext(), "Opcion deshabilitada!!",Toast.LENGTH_SHORT).show();
-				// Remote Server
+//				// Remote Server
                 mPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-                String url = mPreferences.getString(PreferencesActivity.KEY_SERVER_URL,
-                        getString(R.string.default_server_url));		        String codigo = mPreferences.getString(PreferencesActivity.KEY_USERID, "");
-		        Editor editor = mPreferences.edit();
-		        
-				FormListTask formList=new FormListTask();
-				formListTask=formList.execute(codigo,url);
-//				String filterForms;
-				try {
-					String filterForms = formList.get();
-					Log.i("menu", ".filterForms:"+filterForms );
-					editor.putString(PreferencesActivity.KEY_FILTERFORMS, filterForms);
-					editor.commit();				
-				} catch (InterruptedException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (ExecutionException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-
-				// Remote Server	
+                String filterForms = mPreferences.getString(PreferencesActivity.KEY_FILTERFORMS, "");
+//                String url = mPreferences.getString(PreferencesActivity.KEY_SERVER_URL,
+//                        getString(R.string.default_server_url));		        
+//                String codigo = mPreferences.getString(PreferencesActivity.KEY_USERID, "");
+//		        Editor editor = mPreferences.edit();
+//		        
+//				FormListTask formList=new FormListTask();
+//				formListTask=formList.execute(codigo,url);
+////				String filterForms;
+//				try {
+//					String filterForms = formList.get();
+//					Log.i("menu", ".filterForms:"+filterForms );
+//					editor.putString(PreferencesActivity.KEY_FILTERFORMS, filterForms);
+//					editor.commit();				
+//				} catch (InterruptedException e1) {
+//					// TODO Auto-generated catch block
+//					e1.printStackTrace();
+//				} catch (ExecutionException e1) {
+//					// TODO Auto-generated catch block
+//					e1.printStackTrace();
+//				}
+//
+//				// Remote Server	
 				Intent i;
 				PackageManager manager = getPackageManager();
 				try {
@@ -123,10 +126,10 @@ public class Menu_principal extends Activity {
 			public void onClick(View v) {
 
 	        	AlertDialog.Builder builder = new AlertDialog.Builder(Menu_principal.this);
-	        	builder.setMessage("¿Desea Salir?")
-	        	        .setTitle("Advertencia")
+	        	builder.setMessage(getString(R.string.exit_yes_no))
+	        	        .setTitle(getString(R.string.warning))
 	        	        .setCancelable(false)
-	        	        .setPositiveButton("Si",
+	        	        .setPositiveButton(getString(R.string.answer_yes),
 	        	                new DialogInterface.OnClickListener() {
 	        	                    @Override
 									public void onClick(DialogInterface dialog, int id) {
@@ -144,7 +147,7 @@ public class Menu_principal extends Activity {
 	        	                        finish();
 	        	                    }
 	        	                })
-	        	        .setNegativeButton("No",
+	        	        .setNegativeButton(getString(R.string.answer_no),
 	 	                new DialogInterface.OnClickListener() {
 	 	                    @Override
 							public void onClick(DialogInterface dialog, int id) {

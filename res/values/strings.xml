@@ -282,5 +282,15 @@
 	<string name="menu_visitlist">Visit List</string>
 	<string name="no_visits">No Visits</string>
 	<string name="online">Network connection available</string>
-	<string name="opc_run_odk">Call ODK</string>	
+	<string name="opc_run_odk">Call SeisD</string>	
+	<string name="opc_show_visits">Show Visits</string>
+	<string name="exit_yes_no">Exit?</string>
+	<string name="answer_yes">Yes</string>
+	<string name="answer_no">No</string>
+	<string name="warning">Warning</string>
+	<string name="session_init_key">Gracias por Iniciar Sesion</string>				
+	<string name="password_expired_key">Contraseña caducada</string>	
+	<string name="select_local">Select a Local!!</string>
+	<string name="call_odk">Call to SeisD?</string>	
+		
 </resources>

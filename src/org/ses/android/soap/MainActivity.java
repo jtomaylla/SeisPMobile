@@ -108,7 +108,7 @@ public class MainActivity extends Activity {
 				}
 				@Override
 				public void onNothingSelected(AdapterView<?> parent) {
-					tvwMensaje.setText("Seleccione un Local!!");
+					tvwMensaje.setText(getString(R.string.select_local));
 				}
 		});
 		
@@ -133,6 +133,7 @@ public class MainActivity extends Activity {
 				    editor.putString(PreferencesActivity.KEY_USERNAME, userName);
 				    editor.putString(PreferencesActivity.KEY_PASSWORD, password);
 				    editor.putString(PreferencesActivity.KEY_USERID, String.valueOf(login.CodigoUsuario));
+				    editor.putString(PreferencesActivity.KEY_LOCAL_ID, selLocal);
 //				    editor.commit();
 
 					response = login.Mensaje;
@@ -141,13 +142,10 @@ public class MainActivity extends Activity {
 		//					Intent i=new Intent(MainActivity.this,Menu_principal.class); 
 		//					startActivity(i); 
 		//				 //
-				 	if(response.equals("Gracias por Iniciar Sesion") || response.equals("Contraseña caducada")){    
-						// Remote Server
-//						FormListTask formList=new FormListTask();
-//						formListTask=formList.execute(String.valueOf(login.CodigoUsuario),url);
-//						String filterForms = formList.get();
-//						Log.i("login", ".filterForms:"+filterForms );
-//						editor.putString(PreferencesActivity.KEY_FILTERFORMS, filterForms);
+
+					
+				 	if(response.equals(getString(R.string.session_init_key)) || response.equals(getString(R.string.password_expired_key))){    
+
 						editor.commit();
 						// Remote Server	
 				 		Intent intent=new Intent(MainActivity.this,Menu_principal.class); 

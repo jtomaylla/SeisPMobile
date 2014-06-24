@@ -12,6 +12,9 @@ public class Visitas implements KvmSerializable {
 	public String FechaVisita;
 	public String HoraCita;
 	public String EstadoVisita;
+	public String CodigoProyecto;
+	public String CodigoGrupoVisita;
+	public String CodigoVisita;
 	
 	public Visitas()
 	{
@@ -20,6 +23,10 @@ public class Visitas implements KvmSerializable {
 		FechaVisita = "";
 		HoraCita = "";
 		EstadoVisita= "";
+		CodigoProyecto= "";
+		CodigoGrupoVisita= "";
+		CodigoVisita= "";
+		
 	}
 	
 	public Visitas(
@@ -27,7 +34,10 @@ public class Visitas implements KvmSerializable {
 			String Visita,
 			String FechaVisita,
 			String HoraCita,
-			String EstadoVisita
+			String EstadoVisita,
+			String CodigoProyecto,
+			String CodigoGrupoVisita,
+			String CodigoVisita			
 			)
 	{
 		this.Proyecto = Proyecto;
@@ -35,6 +45,9 @@ public class Visitas implements KvmSerializable {
 		this.FechaVisita = FechaVisita;
 		this.HoraCita = HoraCita;
 		this.EstadoVisita  = EstadoVisita ;
+		this.CodigoProyecto = CodigoProyecto;
+		this.CodigoGrupoVisita = CodigoGrupoVisita;
+		this.CodigoVisita = CodigoVisita;
 	}
 	
 	@Override
@@ -52,6 +65,12 @@ public class Visitas implements KvmSerializable {
             return HoraCita;
         case 4:
             return EstadoVisita;
+        case 5:
+            return CodigoProyecto;
+        case 6:
+            return CodigoGrupoVisita;
+        case 7:
+            return CodigoVisita;
         }
 		
 		return null;
@@ -59,7 +78,7 @@ public class Visitas implements KvmSerializable {
 	
 	@Override
 	public int getPropertyCount() {
-		return 5;
+		return 8;
 	}
 	
 	@SuppressWarnings("rawtypes")
@@ -87,7 +106,18 @@ public class Visitas implements KvmSerializable {
             info.type = PropertyInfo.STRING_CLASS;
             info.name = "EstadoVisita";
             break;
-	            
+        case 5:
+            info.type = PropertyInfo.STRING_CLASS;
+            info.name = "CodigoProyecto";
+            break;
+        case 6:
+            info.type = PropertyInfo.STRING_CLASS;
+            info.name = "CodigoGrupoVisita";
+            break;
+        case 7:
+            info.type = PropertyInfo.STRING_CLASS;
+            info.name = "CodigoVisita";
+            break;            
 	    default:break;
         }
 	}
@@ -111,7 +141,15 @@ public class Visitas implements KvmSerializable {
         case 4:
         	EstadoVisita  = val.toString();
             break;
-
+        case 5:
+        	CodigoProyecto  = val.toString();
+            break;
+        case 6:
+        	CodigoGrupoVisita  = val.toString();
+            break;
+        case 7:
+        	CodigoVisita  = val.toString();
+            break;            
 	    default:break;
         }
 	}

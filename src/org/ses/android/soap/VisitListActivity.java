@@ -22,12 +22,19 @@ import org.ses.android.seispapp.R;
 import org.ses.android.soap.database.Visitas;
 import org.ses.android.soap.preferences.AdminPreferencesActivity;
 import org.ses.android.soap.preferences.PreferencesActivity;
+import org.ses.android.soap.tasks.FormListTask;
 import org.ses.android.soap.tasks.VisitaListTask;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
+import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -60,7 +67,8 @@ public class VisitListActivity extends Activity {
 
     public ProgressDialog mProgressDialog;
 	private VisitaListTask mVisitaListTask;
-    @SuppressWarnings("deprecation")
+	private AsyncTask<String, String, String> formListTask;
+	@SuppressWarnings("deprecation")
 	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -96,6 +104,7 @@ public class VisitListActivity extends Activity {
             public void onItemClick(AdapterView<?> a, View v, int position, long id) {
             	
             	//Alternativa 1:
+            	Visitas vis = (Visitas)a.getAdapter().getItem(position);
             	String opcionSeleccionada = 
             			((Visitas)a.getAdapter().getItem(position)).Visita;
             	
@@ -104,7 +113,75 @@ public class VisitListActivity extends Activity {
             	//		((TextView)v.findViewById(R.id.LblTitulo))
             	//			.getText().toString();
             	
-            	lbl_novisits.setText("Opción seleccionada: " + opcionSeleccionada);
+//            	lbl_novisits.setText("Opción seleccionada: " + opcionSeleccionada);
+				// Remote Server
+                mPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+                String url = mPreferences.getString(PreferencesActivity.KEY_SERVER_URL,
+                        getString(R.string.default_server_url));		        
+                String userid = mPreferences.getString(PreferencesActivity.KEY_USERID, "");
+                String local_id = mPreferences.getString(PreferencesActivity.KEY_LOCAL_ID, "");
+                
+//                String project_id = mPreferences.getString(PreferencesActivity.KEY_PROJECT_ID, "");
+//                String visit_group_id = mPreferences.getString(PreferencesActivity.KEY_VISIT_GROUP_ID, "");
+//                String visit_id = mPreferences.getString(PreferencesActivity.KEY_VISIT_ID, "");
+             
+                String project_id = vis.CodigoProyecto;
+                String visit_group_id = vis.CodigoGrupoVisita;
+                String visit_id = vis.CodigoVisita;     
+                
+		        Editor editor = mPreferences.edit();
+		        
+				FormListTask formList=new FormListTask();
+				formListTask=formList.execute(userid,local_id,project_id,visit_group_id,visit_id,url);
+//				String filterForms;
+				try {
+					String filterForms = formList.get();
+					
+					Log.i("menu", ".filterForms:"+filterForms );
+					editor.putString(PreferencesActivity.KEY_FILTERFORMS, filterForms);
+					editor.commit();
+					// Call ODK
+		        	AlertDialog.Builder builder = new AlertDialog.Builder(VisitListActivity.this);
+		        	builder.setMessage(getString(R.string.call_odk))
+		        	        .setTitle(getString(R.string.warning))
+		        	        .setCancelable(false)
+		        	        .setPositiveButton(getString(R.string.answer_yes),
+		        	                new DialogInterface.OnClickListener() {
+		        	                    @Override
+										public void onClick(DialogInterface dialog, int id) {
+		        	        				Intent i;
+		        	        				PackageManager manager = getPackageManager();
+		        	        				try {
+		        	        				    i = manager.getLaunchIntentForPackage("org.odk.collect.android");
+		        	        				    if (i == null)
+		        	        				        throw new PackageManager.NameNotFoundException();
+		        	        				    i.addCategory(Intent.CATEGORY_LAUNCHER);
+		        	        				    startActivity(i);
+		        	        				} catch (PackageManager.NameNotFoundException e) {
+
+		        	        				}
+		        	                    }
+		        	                })
+		        	        .setNegativeButton(getString(R.string.answer_no),
+		 	                new DialogInterface.OnClickListener() {
+		 	                    @Override
+								public void onClick(DialogInterface dialog, int id) {
+		 	                        dialog.cancel();
+		 	                    }
+		 	                });
+		        	AlertDialog alert = builder.create();
+		        	alert.show(); 
+
+					// Call ODK
+				} catch (InterruptedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (ExecutionException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+
+				// Remote Server	
             }
         });
 
@@ -178,7 +255,9 @@ public class VisitListActivity extends Activity {
 			
 			TextView lblSubtitulo = (TextView)item.findViewById(R.id.LblSubTitulo);
 			lblSubtitulo.setText(datos[position].FechaVisita+"-"+datos[position].HoraCita+"-"+datos[position].EstadoVisita);
-			
+
+//			TextView lblFiltro = (TextView)item.findViewById(R.id.LblFiltro);
+//			lblFiltro.setText(datos[position].CodigoProyecto+"-"+datos[position].CodigoGrupoVisita+"-"+datos[position].CodigoVisita);			
 			return(item);
 		}
     }

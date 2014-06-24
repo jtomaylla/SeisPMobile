@@ -18,7 +18,7 @@ public class FormListTask extends AsyncTask<String,String,String> {
     	
     	String resul= "";
 
-		String urlserver = params[1];
+		String urlserver = params[5];
     	final String NAMESPACE = urlserver+"/";
 		final String URL=NAMESPACE+"WSSEIS/WSParticipante.asmx";
 		final String METHOD_NAME = "ListadoFormatos";
@@ -26,6 +26,11 @@ public class FormListTask extends AsyncTask<String,String,String> {
 		SoapObject request = new SoapObject(NAMESPACE, METHOD_NAME);
 
 		request.addProperty("CodigoUsuario", params[0]);
+		request.addProperty("CodigoLocal", params[1]);
+		request.addProperty("CodigoProyecto", params[2]);
+		request.addProperty("CodigoGrupoVisita", params[3]);
+		request.addProperty("CodigoVisita", params[4]);
+		
 		SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
 		envelope.dotNet = true;
 

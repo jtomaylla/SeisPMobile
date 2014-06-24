@@ -30,6 +30,7 @@ public class ParticipanteBusquedaActivity extends Activity {
 	private static final int VISITLIST_ID = Menu.FIRST;
 	private EditText edt_dni_document;
 	private Button btnSearch;
+	private Button btnShowVisits;
 //	private ParticipantDbAdapter mDbHelper;
 	private EditText edt_nombresb;
 	private EditText edt_ape_patb;
@@ -54,7 +55,9 @@ public class ParticipanteBusquedaActivity extends Activity {
 //
 		btnSearch = (Button)findViewById(R.id.btnSearch);
 		btgNavega = (GrupoBotones)findViewById(R.id.btgNavega);
+		btnShowVisits = (Button)findViewById(R.id.btnShowVisits);
 
+		
 		btnSearch.setOnClickListener(new View.OnClickListener() {
 		@Override
 		public void onClick(View v) {
@@ -121,7 +124,21 @@ public class ParticipanteBusquedaActivity extends Activity {
 				Intent intent=new Intent(ParticipanteBusquedaActivity.this,ParticipanteVisitaActivity.class); 
 				startActivity(intent); 		
 			}
-		});			
+		});		
+		
+		btnShowVisits.setOnClickListener(new View.OnClickListener() {
+		@Override
+		public void onClick(View v) {
+	        if (!UrlUtils.validData(doc_identidad, "[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]")){
+				Toast.makeText(getBaseContext(), "Nro. de DNI invalido!!",Toast.LENGTH_SHORT).show();
+			}
+	        else
+			{
+                VISITLIST();
+			}
+		}
+		});
+		        
 	}
 	
     @Override

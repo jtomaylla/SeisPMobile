@@ -39,7 +39,7 @@
 	</string-array>
 
 	<string-array name="ArrayOfLocal">
-        <item>Seleccione Local</item>
+        <item>Select a Local</item>
         <item>CB</item>
         <item>SMP</item>
         <item>SB</item>
