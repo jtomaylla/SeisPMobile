@@ -116,6 +116,9 @@ public class VisitListActivity extends Activity {
 //            	lbl_novisits.setText("Opción seleccionada: " + opcionSeleccionada);
 				// Remote Server
                 mPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+              //testSP
+                SharedPreferences prefs = getSharedPreferences("demopref",Context.MODE_WORLD_READABLE);
+              //testSP
                 String url = mPreferences.getString(PreferencesActivity.KEY_SERVER_URL,
                         getString(R.string.default_server_url));		        
                 String userid = mPreferences.getString(PreferencesActivity.KEY_USERID, "");
@@ -140,6 +143,13 @@ public class VisitListActivity extends Activity {
 					Log.i("menu", ".filterForms:"+filterForms );
 					editor.putString(PreferencesActivity.KEY_FILTERFORMS, filterForms);
 					editor.commit();
+					//testSP
+					SharedPreferences.Editor editor1 = prefs.edit();
+					editor1.clear();
+					editor1.commit();
+		            editor1.putString("stringFilterForms", filterForms);
+		            editor1.commit();
+		            //testSP
 					// Call ODK
 		        	AlertDialog.Builder builder = new AlertDialog.Builder(VisitListActivity.this);
 		        	builder.setMessage(getString(R.string.call_odk))
@@ -156,6 +166,8 @@ public class VisitListActivity extends Activity {
 		        	        				    if (i == null)
 		        	        				        throw new PackageManager.NameNotFoundException();
 		        	        				    i.addCategory(Intent.CATEGORY_LAUNCHER);
+//		        	        				    i.addCategory(Intent.CATEGORY_HOME);
+//		        	        				    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		        	        				    startActivity(i);
 		        	        				} catch (PackageManager.NameNotFoundException e) {
 

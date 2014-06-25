@@ -38,7 +38,7 @@
 
 	    <Button
 	        android:id="@+id/btnSearch"
-	        android:layout_width="100dp"
+	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:layout_gravity="left"
 	        android:height="20dip"
@@ -47,7 +47,7 @@
 	        android:textSize="12sp" />
 	    <Button
 	        android:id="@+id/btnShowVisits"
-	        android:layout_width="100dp"
+	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:layout_gravity="left"
 	        android:height="20dip"
