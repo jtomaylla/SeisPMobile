@@ -105,8 +105,8 @@ public class VisitListActivity extends Activity {
             	
             	//Alternativa 1:
             	Visitas vis = (Visitas)a.getAdapter().getItem(position);
-            	String opcionSeleccionada = 
-            			((Visitas)a.getAdapter().getItem(position)).Visita;
+//            	String opcionSeleccionada = 
+//            			((Visitas)a.getAdapter().getItem(position)).Visita;
             	
             	//Alternativa 2:
             	//String opcionSeleccionada = 
@@ -123,11 +123,6 @@ public class VisitListActivity extends Activity {
                         getString(R.string.default_server_url));		        
                 String userid = mPreferences.getString(PreferencesActivity.KEY_USERID, "");
                 String local_id = mPreferences.getString(PreferencesActivity.KEY_LOCAL_ID, "");
-                
-//                String project_id = mPreferences.getString(PreferencesActivity.KEY_PROJECT_ID, "");
-//                String visit_group_id = mPreferences.getString(PreferencesActivity.KEY_VISIT_GROUP_ID, "");
-//                String visit_id = mPreferences.getString(PreferencesActivity.KEY_VISIT_ID, "");
-             
                 String project_id = vis.CodigoProyecto;
                 String visit_group_id = vis.CodigoGrupoVisita;
                 String visit_id = vis.CodigoVisita;     

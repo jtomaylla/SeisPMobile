@@ -83,8 +83,8 @@ public class Menu_principal extends Activity {
 			public void onClick(View v) {		
 //				Toast.makeText(getBaseContext(), "Opcion deshabilitada!!",Toast.LENGTH_SHORT).show();
 //				// Remote Server
-                mPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-                String filterForms = mPreferences.getString(PreferencesActivity.KEY_FILTERFORMS, "");
+//                mPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+//                String filterForms = mPreferences.getString(PreferencesActivity.KEY_FILTERFORMS, "");
 //                String url = mPreferences.getString(PreferencesActivity.KEY_SERVER_URL,
 //                        getString(R.string.default_server_url));		        
 //                String codigo = mPreferences.getString(PreferencesActivity.KEY_USERID, "");
