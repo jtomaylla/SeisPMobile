@@ -20,7 +20,6 @@ import java.util.concurrent.ExecutionException;
 
 import org.ses.android.seispapp.R;
 import org.ses.android.soap.database.Visitas;
-import org.ses.android.soap.preferences.AdminPreferencesActivity;
 import org.ses.android.soap.preferences.PreferencesActivity;
 import org.ses.android.soap.tasks.FormListTask;
 import org.ses.android.soap.tasks.VisitaListTask;
@@ -42,13 +41,16 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class VisitListActivity extends Activity {
 	static final int DATE_DIALOG_ID = 999;
@@ -63,7 +65,7 @@ public class VisitListActivity extends Activity {
 	private ListView lstVisit;
 	private TextView lbl_nombres;
 	private Visitas[] datos;
-	
+
 
     public ProgressDialog mProgressDialog;
 	private VisitaListTask mVisitaListTask;
@@ -107,89 +109,102 @@ public class VisitListActivity extends Activity {
             	Visitas vis = (Visitas)a.getAdapter().getItem(position);
 //            	String opcionSeleccionada = 
 //            			((Visitas)a.getAdapter().getItem(position)).Visita;
-            	
+            	//test
+                // Getting the Container Layout of the ListView
+                LinearLayout linearLayoutParent = (LinearLayout) v;
+ 
+                // Getting the inner Linear Layout
+                LinearLayout linearLayoutChild = (LinearLayout) linearLayoutParent.getChildAt(0);
+                // Getting the Country TextView
+                TextView tvCountry = (TextView) linearLayoutChild.getChildAt(1);
+ 
+                Toast.makeText(getBaseContext(), tvCountry.getText().toString(), Toast.LENGTH_SHORT).show();
+            }
+              //test
+
             	//Alternativa 2:
             	//String opcionSeleccionada = 
             	//		((TextView)v.findViewById(R.id.LblTitulo))
             	//			.getText().toString();
             	
 //            	lbl_novisits.setText("Opción seleccionada: " + opcionSeleccionada);
-				// Remote Server
-                mPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-              //testSP
-                SharedPreferences prefs = getSharedPreferences("demopref",Context.MODE_WORLD_READABLE);
-              //testSP
-                String url = mPreferences.getString(PreferencesActivity.KEY_SERVER_URL,
-                        getString(R.string.default_server_url));		        
-                String userid = mPreferences.getString(PreferencesActivity.KEY_USERID, "");
-                String local_id = mPreferences.getString(PreferencesActivity.KEY_LOCAL_ID, "");
-                String project_id = vis.CodigoProyecto;
-                String visit_group_id = vis.CodigoGrupoVisita;
-                String visit_id = vis.CodigoVisita;     
-                
-		        Editor editor = mPreferences.edit();
-		        
-				FormListTask formList=new FormListTask();
-				formListTask=formList.execute(userid,local_id,project_id,visit_group_id,visit_id,url);
-//				String filterForms;
-				try {
-					String filterForms = formList.get();
-					
-					Log.i("menu", ".filterForms:"+filterForms );
-					editor.putString(PreferencesActivity.KEY_FILTERFORMS, filterForms);
-					editor.commit();
-					//testSP
-					SharedPreferences.Editor editor1 = prefs.edit();
-					editor1.clear();
-					editor1.commit();
-		            editor1.putString("stringFilterForms", filterForms);
-		            editor1.commit();
-		            //testSP
-					// Call ODK
-		        	AlertDialog.Builder builder = new AlertDialog.Builder(VisitListActivity.this);
-		        	builder.setMessage(getString(R.string.call_odk))
-		        	        .setTitle(getString(R.string.warning))
-		        	        .setCancelable(false)
-		        	        .setPositiveButton(getString(R.string.answer_yes),
-		        	                new DialogInterface.OnClickListener() {
-		        	                    @Override
-										public void onClick(DialogInterface dialog, int id) {
-		        	        				Intent i;
-		        	        				PackageManager manager = getPackageManager();
-		        	        				try {
-		        	        				    i = manager.getLaunchIntentForPackage("org.odk.collect.android");
-		        	        				    if (i == null)
-		        	        				        throw new PackageManager.NameNotFoundException();
-		        	        				    i.addCategory(Intent.CATEGORY_LAUNCHER);
-//		        	        				    i.addCategory(Intent.CATEGORY_HOME);
-//		        	        				    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-		        	        				    startActivity(i);
-		        	        				} catch (PackageManager.NameNotFoundException e) {
-
-		        	        				}
-		        	                    }
-		        	                })
-		        	        .setNegativeButton(getString(R.string.answer_no),
-		 	                new DialogInterface.OnClickListener() {
-		 	                    @Override
-								public void onClick(DialogInterface dialog, int id) {
-		 	                        dialog.cancel();
-		 	                    }
-		 	                });
-		        	AlertDialog alert = builder.create();
-		        	alert.show(); 
-
-					// Call ODK
-				} catch (InterruptedException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (ExecutionException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-
-				// Remote Server	
-            }
+//				// Remote Server
+//                mPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+//              //testSP
+//                SharedPreferences prefs = getSharedPreferences("demopref",Context.MODE_WORLD_READABLE);
+//              //testSP
+//                String url = mPreferences.getString(PreferencesActivity.KEY_SERVER_URL,
+//                        getString(R.string.default_server_url));		        
+//                String userid = mPreferences.getString(PreferencesActivity.KEY_USERID, "");
+//                String local_id = mPreferences.getString(PreferencesActivity.KEY_LOCAL_ID, "");
+//                String project_id = vis.CodigoProyecto;
+//                String visit_group_id = vis.CodigoGrupoVisita;
+//                String visit_id = vis.CodigoVisita;     
+//                
+//		        Editor editor = mPreferences.edit();
+//		        
+//				FormListTask formList=new FormListTask();
+//				formListTask=formList.execute(userid,local_id,project_id,visit_group_id,visit_id,url);
+////				String filterForms;
+//				try {
+//					String filterForms = formList.get();
+//					
+//					Log.i("menu", ".filterForms:"+filterForms );
+//					editor.putString(PreferencesActivity.KEY_FILTERFORMS, filterForms);
+//					editor.commit();
+//					//testSP
+//					SharedPreferences.Editor editor1 = prefs.edit();
+//					editor1.clear();
+//					editor1.commit();
+//		            editor1.putString("stringFilterForms", filterForms);
+//		            editor1.commit();
+//		            //testSP
+//					// Call ODK
+//		        	AlertDialog.Builder builder = new AlertDialog.Builder(VisitListActivity.this);
+//		        	builder.setMessage(getString(R.string.call_odk))
+//		        	        .setTitle(getString(R.string.warning))
+//		        	        .setCancelable(false)
+//		        	        .setPositiveButton(getString(R.string.answer_yes),
+//		        	                new DialogInterface.OnClickListener() {
+//		        	                    @Override
+//										public void onClick(DialogInterface dialog, int id) {
+//		        	        				Intent i;
+//		        	        				PackageManager manager = getPackageManager();
+//		        	        				try {
+//		        	        				    i = manager.getLaunchIntentForPackage("org.odk.collect.android");
+//		        	        				    if (i == null)
+//		        	        				        throw new PackageManager.NameNotFoundException();
+//		        	        				    i.addCategory(Intent.CATEGORY_LAUNCHER);
+////		        	        				    i.addCategory(Intent.CATEGORY_HOME);
+////		        	        				    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//		        	        				    startActivity(i);
+//		        	        				} catch (PackageManager.NameNotFoundException e) {
+//
+//		        	        				}
+//		        	                    }
+//		        	                })
+//		        	        .setNegativeButton(getString(R.string.answer_no),
+//		 	                new DialogInterface.OnClickListener() {
+//		 	                    @Override
+//								public void onClick(DialogInterface dialog, int id) {
+//		 	                        dialog.cancel();
+//		 	                    }
+//		 	                });
+//		        	AlertDialog alert = builder.create();
+//		        	alert.show(); 
+//
+//					// Call ODK
+//				} catch (InterruptedException e1) {
+//					// TODO Auto-generated catch block
+//					e1.printStackTrace();
+//				} catch (ExecutionException e1) {
+//					// TODO Auto-generated catch block
+//					e1.printStackTrace();
+//				}
+//
+//				// Remote Server	
+//            }
+            
         });
 
     }
@@ -265,9 +280,23 @@ public class VisitListActivity extends Activity {
 
 //			TextView lblFiltro = (TextView)item.findViewById(R.id.LblFiltro);
 //			lblFiltro.setText(datos[position].CodigoProyecto+"-"+datos[position].CodigoGrupoVisita+"-"+datos[position].CodigoVisita);			
+			ImageButton imbEstado = (ImageButton) findViewById(R.id.imbEstado);
+//			imbEstado.setImageResource(R.drawable.ic_list_arrow);
+			
+//			imbEstado.setOnClickListener(
+//					new OnClickListener() {
+//					      String s = "Visita";
+//					    @Override
+//					    public void onClick(View v) {
+//					        Toast.makeText(context, s, Toast.LENGTH_SHORT).show();          
+//					    }
+//					}
+//			);
+			
 			return(item);
 		}
+    	
     }
- 
+   
 }
 

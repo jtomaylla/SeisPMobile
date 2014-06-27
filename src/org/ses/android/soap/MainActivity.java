@@ -141,7 +141,7 @@ public class MainActivity extends Activity {
 		//				 //Sale despues
 		//					Intent i=new Intent(MainActivity.this,Menu_principal.class); 
 		//					startActivity(i); 
-		//				 //
+		//				 //Sale despues
 
 					
 				 	if(response.equals(getString(R.string.session_init_key)) || response.equals(getString(R.string.password_expired_key))){    
